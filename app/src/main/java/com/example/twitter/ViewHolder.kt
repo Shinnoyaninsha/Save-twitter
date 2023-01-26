@@ -4,11 +4,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.twitter.databinding.ActivityMainBinding
 
-class TLListAdapter : ListAdapter<Int,TLListAdapter.TLViewHolder>(RowItemDiffCallback()) {
+open class TLListAdapter(values: MutableLiveData<List<Tweet>>) : ListAdapter<Int,TLListAdapter.TLViewHolder>(RowItemDiffCallback()) {
 
     class TLViewHolder private constructor(val binding: ActivityMainBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -29,7 +30,7 @@ class TLListAdapter : ListAdapter<Int,TLListAdapter.TLViewHolder>(RowItemDiffCal
                                   position: Int) {
         holder.binding.num = getItem(position)
 
-        //holder.binding.executePendingBindings() pas sûr d'en avoir besoin
+        holder.binding.executePendingBindings() //pas sûr d'en avoir besoin
 
     }
 
