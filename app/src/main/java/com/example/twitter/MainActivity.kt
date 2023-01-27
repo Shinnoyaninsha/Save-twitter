@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.twitter.databinding.ActivityMainBinding
+import com.example.twitter.databinding.RecyclerViewItemBinding
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -22,12 +23,11 @@ class MainActivity : AppCompatActivity() {
         binding.lifecycleOwner=this
         binding.ValidateUser.setOnClickListener(){
             viewModel.getTweet()
-            //viewModel.getTweet(binding.textInputEditText.text.toString())
             }
         val rv: RecyclerView = binding.TL
         rv.layoutManager = LinearLayoutManager(this)
 
-        rv.adapter = TLListAdapter(viewModel._Listtweets)
+        rv.adapter = TLListAdapter(viewModel._textTweets)
 
 
 

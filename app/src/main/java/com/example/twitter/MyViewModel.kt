@@ -9,7 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class MyViewModel(application:Application) : AndroidViewModel(application) {
+class MyViewModel(application: Application) : AndroidViewModel(application) {
     fun getTweet() {
         //fun getTweet(user:String)
         viewModelScope.launch {
@@ -21,12 +21,22 @@ class MyViewModel(application:Application) : AndroidViewModel(application) {
             /*withContext(Dispatchers.Main) {
                 Toast.makeText(getApplication(), result.data[0].text, Toast.LENGTH_LONG).show()
             }*/
-            withContext(Dispatchers.Main){
-                _Listtweets.value=result.data
-                //je n'ai pas trouvé comment récupérer la valeur de chaque champ dans le résultat
+            withContext(Dispatchers.Main) {
+
+                Toast.makeText(getApplication(), result.data[0].text, Toast.LENGTH_LONG).show()
+                _Listtweets.value = result.data
+
+                val textTweet:ArrayList<String> = ArrayList()
+                for (tweet in result.data){
+                    textTweet.add(result.data[0].text)
+                }
+                _textTweets.value=textTweet
+
             }
+
         }
     }
 
-    val _Listtweets=MutableLiveData<List<Tweet>>()
+    val _Listtweets = MutableLiveData<List<Tweet>>()
+    val _textTweets= MutableLiveData<ArrayList<String>>()
 }
